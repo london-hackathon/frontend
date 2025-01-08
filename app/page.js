@@ -110,6 +110,11 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <div className="flex justify-center mt-8">
+        <button className="px-8 py-3 bg-blue-500 text-white text-lg font-light rounded-lg hover:bg-blue-600 transition-colors">
+          Check Bias
+        </button>
+      </div>
     </div>
   );
 }
