@@ -94,14 +94,15 @@ export default function Home() {
           Summarize the Dataset Usage
         </div>
         <div>
-          <input
-            type="text"
+          <textarea
             placeholder="Describe your dataset here..."
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full border-2 border-gray-400 rounded-[15px] p-4 pb-20 bg-transparent focus:outline-none focus:border-blue-400"
+            className="w-full border-2 border-gray-400 rounded-[15px] p-4 bg-transparent focus:outline-none focus:border-blue-400 text-white"
+            rows={4} // Adjust the number of rows as needed
           />
         </div>
+
         <div className="flex justify-between items-center mt-6">
           <div className="flex items-center">
             <div className="text-white text-xl font-light pr-5">
