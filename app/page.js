@@ -8,6 +8,7 @@ export default function Home() {
   const [demographic, setDemographic] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const fileInputRef = useRef(null);
 
   const toggleDropdown = () => {
@@ -31,6 +32,52 @@ export default function Home() {
 
   const handleUploadClick = () => {
     fileInputRef.current.click();
+  };
+
+  const handleCheckBias = async () => {
+    // Validate inputs
+    if (!selectedFile) {
+      alert("Please upload a CSV file first");
+      return;
+    }
+    if (!demographic) {
+      alert("Please select a demographic");
+      return;
+    }
+    if (!description.trim()) {
+      alert("Please provide a dataset description");
+      return;
+    }
+
+    // Create FormData object
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+    formData.append("demographic", demographic);
+    formData.append("description", description);
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("http://localhost:5000/api/bias", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to analyze bias");
+      }
+
+      const result = await response.json();
+      console.log("Analysis result:", result);
+      // Handle successful response here (e.g., show results, navigate to results page)
+      alert("Analysis completed successfully!");
+    } catch (error) {
+      console.error("Error analyzing bias:", error);
+      alert(error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -111,8 +158,15 @@ export default function Home() {
         </div>
       </div>
       <div className="flex justify-center mt-8">
-        <button className="px-8 py-3 bg-blue-500 text-white text-lg font-light rounded-lg hover:bg-blue-600 transition-colors">
-          Check Bias
+        <button
+          onClick={handleCheckBias}
+          disabled={isLoading}
+          className={`px-8 py-3 bg-blue-500 text-white text-lg font-light rounded-lg transition-colors
+            ${
+              isLoading ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-600"
+            }`}
+        >
+          {isLoading ? "Analyzing..." : "Check Bias"}
         </button>
       </div>
     </div>
