@@ -118,7 +118,7 @@ export default function Home() {
                 <div className="absolute top-full left-0 mt-2 border-2 border-gray-400 rounded-[10px] p-4 w-48 text-white z-10">
                   <div
                     className="cursor-pointer hover:bg-gray-700 p-2 rounded-md"
-                    onClick={() => selectDemographic("Ethnicity")}
+                    onClick={() => selectDemographic("Race")}
                   >
                     Ethnicity
                   </div>
