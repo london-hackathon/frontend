@@ -1,9 +1,10 @@
 "use client";
-import Image from "next/image";
 import { useState, useRef } from "react";
 import { MdOutlineFileUpload } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   const [description, setDescription] = useState("");
   const [demographic, setDemographic] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -69,9 +70,10 @@ export default function Home() {
       }
 
       const result = await response.json();
-      console.log("Analysis result:", result);
-      // Handle successful response here (e.g., show results, navigate to results page)
-      alert("Analysis completed successfully!");
+
+      // Navigate to results page with the analysis data
+      const encodedResult = encodeURIComponent(JSON.stringify(result));
+      router.push(`/results?result=${encodedResult}`);
     } catch (error) {
       console.error("Error analyzing bias:", error);
       alert(error.message);
