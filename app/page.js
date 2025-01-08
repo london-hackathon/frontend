@@ -120,7 +120,7 @@ export default function Home() {
                     className="cursor-pointer hover:bg-gray-700 p-2 rounded-md"
                     onClick={() => selectDemographic("Race")}
                   >
-                    Ethnicity
+                    Race
                   </div>
                   <div
                     className="cursor-pointer hover:bg-gray-700 p-2 rounded-md"

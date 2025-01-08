@@ -1,5 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
+import PieChartComponent from "../components/PieChartComponent";
 
 export default function Results() {
   const searchParams = useSearchParams();
@@ -24,27 +25,34 @@ export default function Results() {
         {analysisResult ? (
           <div className="space-y-6">
             {/* Dataset Information Section */}
-            <div className="border-2 border-gray-400 rounded-lg p-6">
+            <div className="border-2 border-blue-400 rounded-lg p-6">
               <h2 className="text-2xl font-light mb-4">Dataset Information</h2>
               <div className="space-y-3">
                 <p className="text-gray-300">
-                  <span className="font-medium">Demographic:</span>{" "}
+                  <span className="font-bold">Demographic:</span>{" "}
                   {analysisResult.demographic}
+                </p>
+                <p className="text-gray-300">
+                  <span className="font-bold">Description:</span>{" "}
+                  {analysisResult.description}
                 </p>
               </div>
             </div>
 
             {/* Bias Analysis Section */}
-            <div className="border-2 border-gray-400 rounded-lg p-6">
+            <div className="border-2 border-blue-400 rounded-lg p-6">
               <h2 className="text-2xl font-light mb-4">Bias Analysis</h2>
-              <p className="text-gray-300">
-                <span className="font-medium">Explanation:</span>{" "}
-                {analysisResult.explanation}
+              <p className="text-gray-300">{analysisResult.explanation}</p>
+              <p className="text-gray-300 mt-4 text-xl">
+                <span className="font-bold">
+                  Bias Score: {analysisResult.score}%
+                </span>
               </p>
-              <p className="text-gray-300 mt-4">
-                <span className="font-medium">Bias Score:</span>{" "}
-                {analysisResult.score}%
-              </p>
+            </div>
+
+            {/* Pie Chart Section */}
+            <div>
+              <PieChartComponent data={analysisResult.processed_data} />
             </div>
           </div>
         ) : (
