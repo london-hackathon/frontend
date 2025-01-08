@@ -10,7 +10,8 @@ export default function Results() {
   try {
     if (result) {
       console.log("Raw result received:", result); // Log the raw result string
-      analysisResult = JSON.parse(decodeURIComponent(result));
+      // Decode and parse the result safely
+      analysisResult = JSON.parse(result); // Assuming it's already JSON, no need to decodeURIComponent
       console.log("Parsed analysis result:", analysisResult); // Log the parsed result
     }
   } catch (error) {
@@ -52,6 +53,7 @@ export default function Results() {
 
             {/* Pie Chart Section */}
             <div>
+              <h2 className="text-2xl font-light mb-4">Data Visualization</h2>
               <PieChartComponent data={analysisResult.processed_data} />
             </div>
           </div>

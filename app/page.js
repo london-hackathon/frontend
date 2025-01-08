@@ -86,7 +86,7 @@ export default function Home() {
     <div className="">
       <div className="flex justify-center items-center">
         <div className="text-center text-5xl text-white font-light pt-10">
-          Hello World
+          Bias Buster 🔎🐧
         </div>
       </div>
       <div className="mx-64 my-20">
